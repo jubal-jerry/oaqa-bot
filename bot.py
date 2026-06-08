@@ -66,7 +66,7 @@ async def on_message(message):
     command = content.split()[0].lower() if content else ""
     args = content[len(command):].strip()
 
-   if command == "convert":
+    if command == "convert":
         if not args:
             await message.channel.send("Usage: `!convert <link1> <link2> ...`")
             return
