@@ -66,12 +66,16 @@ async def on_message(message):
     command = content.split()[0].lower() if content else ""
     args = content[len(command):].strip()
 
-    if command == "convert":
+   if command == "convert":
         if not args:
-            await message.channel.send("Usage: `!convert <link>`")
+            await message.channel.send("Usage: `!convert <link1> <link2> ...`")
             return
-        result = convert_link(args)
-        await message.channel.send(f"✅ Converted link:\n{result}")
+        links = args.split()
+        results = []
+        for i, link in enumerate(links, 1):
+            converted = convert_link(link)
+            results.append(f"**{i}.** {converted}")
+        await message.channel.send("✅ Converted links:\n" + "\n".join(results))
 
     elif command == "resultsday":
         a, b = get_results_dates()
